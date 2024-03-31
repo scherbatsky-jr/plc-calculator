@@ -18,7 +18,7 @@ class MyLexer(Lexer):
     tokens = { ASSIGN, NAME, NUMBER, MINUS, DIVIDE, TIMES, LPAREN, RPAREN}
     
     # https://sly.readthedocs.io/en/latest/sly.html#literal-characters
-    literals = { '+' }
+    literals = { '+', '*' }
     
     ### matching rule ###
     # The matching work from top to bottom

@@ -192,6 +192,19 @@
     </rect>
    </property>
   </widget>
+  <widget class="QLabel" name="input_label">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>50</y>
+     <width>50</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name='text'>
+     <string>Input: </string>
+   </property>
+  </widget>
   <widget class="QLineEdit" name="input_text">
    <property name="geometry">
     <rect>
@@ -200,6 +213,9 @@
      <width>301</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="readOnly">
+     <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="button_clear">
@@ -213,6 +229,19 @@
    </property>
    <property name="text">
     <string>C</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pre_fix_label">
+   <property name="geometry">
+    <rect>
+     <x>25</x>
+     <y>205</y>
+     <width>100</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name='text'>
+     <string>Pre Fix Notation: </string>
    </property>
   </widget>
   <widget class="QLineEdit" name="pre_fix_text">
@@ -229,6 +258,19 @@
    </property>
    <property name="placeholderText">
     <string>Pre Fix Notation</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="post_fix_label">
+   <property name="geometry">
+    <rect>
+     <x>25</x>
+     <y>255</y>
+     <width>110</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name='text'>
+     <string>Post Fix Notation: </string>
    </property>
   </widget>
   <widget class="QLineEdit" name="post_fix_text">

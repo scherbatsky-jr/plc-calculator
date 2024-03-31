@@ -61,17 +61,14 @@ class MyParser(Parser):
         tokens = input_text.split()
         prefix = []
         operator_stack = []
-        precedence_dict = {}
+        precedence = {'+': 2, '-': 2, '*': 1, '/': 1}
 
-        for associativity, *ops in self.precedence:
-            for op in ops:
-                precedence_dict[op] = (associativity, len(ops))
         for token in reversed(list(tokens)):
             if token.isdigit():
                 prefix.append(token)
-            elif token in precedence_dict:
+            elif token in precedence:
                 while (operator_stack and
-                    precedence_dict[token] <= precedence_dict[operator_stack[-1]]):
+                    precedence[token] <= precedence[operator_stack[-1]]):
                     prefix.append(operator_stack.pop())
                 operator_stack.append(token)
 
@@ -86,16 +83,13 @@ class MyParser(Parser):
         operator_stack = []
         postfix = []
         tokens = expression.split()
-        precedence_dict = {}
+        precedence = {'+': 2, '-': 2, '*': 1, '/': 1}
 
-        for associativity, *ops in self.precedence:
-            for op in ops:
-                precedence_dict[op] = (associativity, len(ops))
         for token in tokens:
             if token.isdigit():
                 postfix.append(token)
             else:
-                while operator_stack and precedence_dict.get(operator_stack[-1], 0) >= precedence_dict.get(token, 0):
+                while operator_stack and precedence.get(operator_stack[-1], 0) >= precedence.get(token, 0):
                     postfix.append(operator_stack.pop())
                 operator_stack.append(token)
         
