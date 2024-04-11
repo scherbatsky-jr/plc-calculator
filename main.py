@@ -46,7 +46,7 @@ class MainWindow(QMainWindow):
         self.button_9.clicked.connect(lambda: self.push("9"))
         self.button_0.clicked.connect(lambda: self.push("0"))
         self.button_plus.clicked.connect(lambda: self.push_literal("+"))
-        self.button_star.clicked.connect(lambda: self.push_literal("*"))
+        self.button_star.clicked.connect(lambda: self.push_literal("x"))
         self.button_equal.clicked.connect(self.push_equal)
         self.button_clear.clicked.connect(self.clear)
 

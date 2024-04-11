@@ -8,7 +8,7 @@ class MyParser(Parser):
     # Get the token list from the lexer (required)
     tokens = MyLexer.tokens
     precedence = (
-        ('left', TIMES, DIVIDE),
+        ('left', "x", DIVIDE),
         ('left', "+", MINUS),
         ('right', UMINUS),
         )
@@ -37,8 +37,9 @@ class MyParser(Parser):
     def expr(self, p):
         return p.expr0 - p.expr1
 
-    @_('expr TIMES expr')
+    @_('expr "x" expr')
     def expr(self, p):
+        print("reached here?")
         return p.expr0 * p.expr1
 
     @_('expr DIVIDE expr')
@@ -61,7 +62,7 @@ class MyParser(Parser):
         tokens = input_text.split()
         prefix = []
         operator_stack = []
-        precedence = {'+': 2, '-': 2, '*': 1, '/': 1}
+        precedence = {'+': 2, '-': 2, 'x': 1, '/': 1}
 
         for token in reversed(tokens):
             if token.isdigit():
@@ -83,7 +84,7 @@ class MyParser(Parser):
         operator_stack = []
         postfix = []
         tokens = expression.split()
-        precedence = {'+': 2, '-': 2, '*': 1, '/': 1}
+        precedence = {'+': 2, '-': 2, 'x': 1, '/': 1}
 
         for token in tokens:
             if token.isdigit():

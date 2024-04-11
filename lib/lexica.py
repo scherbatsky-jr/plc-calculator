@@ -15,10 +15,10 @@ class MyLexer(Lexer):
     # set `tokens` so it can be used in the parser.
     # This must be here and all Capitalized. 
     # Please, ignore IDE warning.
-    tokens = { ASSIGN, NAME, NUMBER, MINUS, TIMES,DIVIDE, LPAREN, RPAREN}
+    tokens = { ASSIGN, NAME, NUMBER, MINUS, DIVIDE, LPAREN, RPAREN}
     
     # https://sly.readthedocs.io/en/latest/sly.html#literal-characters
-    literals = { '+', '*' }
+    literals = { '+', 'x' }
     
     ### matching rule ###
     # The matching work from top to bottom
@@ -28,11 +28,12 @@ class MyLexer(Lexer):
     ignore = ' \t'
 
     ### EX1: simply define with regEX ###
-    NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
+    NAME = r'(?!x)[a-zA-Z_][a-zA-Z0-9_]*'
     ### EX2: Define as a function ###
     @_(r'\d+')
     def NUMBER(self, token):
         # Note that this function set parse token.value to integer
+        print(f"Token {token}")
         token.value = int(token.value)
         # Extra print for debug
         print(f"====This print from NUMBER function: {token.type=} {token.value=} {type(token.value)=}")
@@ -42,7 +43,7 @@ class MyLexer(Lexer):
     ASSIGN  = r'\='
     # PLUS    = r'\+'
     MINUS   = r'-'
-    TIMES   = r'\*'
+    # TIMES   = r'\*'
     DIVIDE  = r'/'
     LPAREN  = r'\('
     RPAREN  = r'\)'

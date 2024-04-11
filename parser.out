@@ -7,7 +7,7 @@ Rule 3     expr -> NUMBER
 Rule 4     expr -> LPAREN expr RPAREN
 Rule 5     expr -> MINUS expr  [precedence=right, level=3]
 Rule 6     expr -> expr DIVIDE expr  [precedence=left, level=1]
-Rule 7     expr -> expr TIMES expr  [precedence=left, level=1]
+Rule 7     expr -> expr x expr  [precedence=left, level=1]
 Rule 8     expr -> expr MINUS expr  [precedence=left, level=2]
 Rule 9     expr -> expr + expr  [precedence=left, level=2]
 
@@ -21,8 +21,8 @@ MINUS                : 5 8
 NAME                 : 2
 NUMBER               : 3
 RPAREN               : 4
-TIMES                : 7
 error                : 
+x                    : 7
 
 Nonterminals, with rules where they appear:
 
@@ -39,7 +39,7 @@ state 0
     (4) expr -> . LPAREN expr RPAREN
     (5) expr -> . MINUS expr
     (6) expr -> . expr DIVIDE expr
-    (7) expr -> . expr TIMES expr
+    (7) expr -> . expr x expr
     (8) expr -> . expr MINUS expr
     (9) expr -> . expr + expr
     NAME            shift and go to state 3
@@ -59,12 +59,12 @@ state 2
 
     (1) statement -> expr .
     (6) expr -> expr . DIVIDE expr
-    (7) expr -> expr . TIMES expr
+    (7) expr -> expr . x expr
     (8) expr -> expr . MINUS expr
     (9) expr -> expr . + expr
     $end            reduce using rule 1 (statement -> expr .)
     DIVIDE          shift and go to state 7
-    TIMES           shift and go to state 8
+    x               shift and go to state 8
     MINUS           shift and go to state 9
     +               shift and go to state 10
 
@@ -79,7 +79,7 @@ state 4
 
     (3) expr -> NUMBER .
     DIVIDE          reduce using rule 3 (expr -> NUMBER .)
-    TIMES           reduce using rule 3 (expr -> NUMBER .)
+    x               reduce using rule 3 (expr -> NUMBER .)
     MINUS           reduce using rule 3 (expr -> NUMBER .)
     +               reduce using rule 3 (expr -> NUMBER .)
     $end            reduce using rule 3 (expr -> NUMBER .)
@@ -93,7 +93,7 @@ state 5
     (4) expr -> . LPAREN expr RPAREN
     (5) expr -> . MINUS expr
     (6) expr -> . expr DIVIDE expr
-    (7) expr -> . expr TIMES expr
+    (7) expr -> . expr x expr
     (8) expr -> . expr MINUS expr
     (9) expr -> . expr + expr
     NUMBER          shift and go to state 4
@@ -109,7 +109,7 @@ state 6
     (4) expr -> . LPAREN expr RPAREN
     (5) expr -> . MINUS expr
     (6) expr -> . expr DIVIDE expr
-    (7) expr -> . expr TIMES expr
+    (7) expr -> . expr x expr
     (8) expr -> . expr MINUS expr
     (9) expr -> . expr + expr
     NUMBER          shift and go to state 4
@@ -125,7 +125,7 @@ state 7
     (4) expr -> . LPAREN expr RPAREN
     (5) expr -> . MINUS expr
     (6) expr -> . expr DIVIDE expr
-    (7) expr -> . expr TIMES expr
+    (7) expr -> . expr x expr
     (8) expr -> . expr MINUS expr
     (9) expr -> . expr + expr
     NUMBER          shift and go to state 4
@@ -136,12 +136,12 @@ state 7
 
 state 8
 
-    (7) expr -> expr TIMES . expr
+    (7) expr -> expr x . expr
     (3) expr -> . NUMBER
     (4) expr -> . LPAREN expr RPAREN
     (5) expr -> . MINUS expr
     (6) expr -> . expr DIVIDE expr
-    (7) expr -> . expr TIMES expr
+    (7) expr -> . expr x expr
     (8) expr -> . expr MINUS expr
     (9) expr -> . expr + expr
     NUMBER          shift and go to state 4
@@ -157,7 +157,7 @@ state 9
     (4) expr -> . LPAREN expr RPAREN
     (5) expr -> . MINUS expr
     (6) expr -> . expr DIVIDE expr
-    (7) expr -> . expr TIMES expr
+    (7) expr -> . expr x expr
     (8) expr -> . expr MINUS expr
     (9) expr -> . expr + expr
     NUMBER          shift and go to state 4
@@ -173,7 +173,7 @@ state 10
     (4) expr -> . LPAREN expr RPAREN
     (5) expr -> . MINUS expr
     (6) expr -> . expr DIVIDE expr
-    (7) expr -> . expr TIMES expr
+    (7) expr -> . expr x expr
     (8) expr -> . expr MINUS expr
     (9) expr -> . expr + expr
     NUMBER          shift and go to state 4
@@ -189,7 +189,7 @@ state 11
     (4) expr -> . LPAREN expr RPAREN
     (5) expr -> . MINUS expr
     (6) expr -> . expr DIVIDE expr
-    (7) expr -> . expr TIMES expr
+    (7) expr -> . expr x expr
     (8) expr -> . expr MINUS expr
     (9) expr -> . expr + expr
     NUMBER          shift and go to state 4
@@ -202,12 +202,12 @@ state 12
 
     (4) expr -> LPAREN expr . RPAREN
     (6) expr -> expr . DIVIDE expr
-    (7) expr -> expr . TIMES expr
+    (7) expr -> expr . x expr
     (8) expr -> expr . MINUS expr
     (9) expr -> expr . + expr
     RPAREN          shift and go to state 19
     DIVIDE          shift and go to state 7
-    TIMES           shift and go to state 8
+    x               shift and go to state 8
     MINUS           shift and go to state 9
     +               shift and go to state 10
 
@@ -216,11 +216,11 @@ state 13
 
     (5) expr -> MINUS expr .
     (6) expr -> expr . DIVIDE expr
-    (7) expr -> expr . TIMES expr
+    (7) expr -> expr . x expr
     (8) expr -> expr . MINUS expr
     (9) expr -> expr . + expr
     DIVIDE          reduce using rule 5 (expr -> MINUS expr .)
-    TIMES           reduce using rule 5 (expr -> MINUS expr .)
+    x               reduce using rule 5 (expr -> MINUS expr .)
     MINUS           reduce using rule 5 (expr -> MINUS expr .)
     +               reduce using rule 5 (expr -> MINUS expr .)
     $end            reduce using rule 5 (expr -> MINUS expr .)
@@ -231,11 +231,11 @@ state 14
 
     (6) expr -> expr DIVIDE expr .
     (6) expr -> expr . DIVIDE expr
-    (7) expr -> expr . TIMES expr
+    (7) expr -> expr . x expr
     (8) expr -> expr . MINUS expr
     (9) expr -> expr . + expr
     DIVIDE          reduce using rule 6 (expr -> expr DIVIDE expr .)
-    TIMES           reduce using rule 6 (expr -> expr DIVIDE expr .)
+    x               reduce using rule 6 (expr -> expr DIVIDE expr .)
     $end            reduce using rule 6 (expr -> expr DIVIDE expr .)
     RPAREN          reduce using rule 6 (expr -> expr DIVIDE expr .)
     MINUS           shift and go to state 9
@@ -244,15 +244,15 @@ state 14
 
 state 15
 
-    (7) expr -> expr TIMES expr .
+    (7) expr -> expr x expr .
     (6) expr -> expr . DIVIDE expr
-    (7) expr -> expr . TIMES expr
+    (7) expr -> expr . x expr
     (8) expr -> expr . MINUS expr
     (9) expr -> expr . + expr
-    DIVIDE          reduce using rule 7 (expr -> expr TIMES expr .)
-    TIMES           reduce using rule 7 (expr -> expr TIMES expr .)
-    $end            reduce using rule 7 (expr -> expr TIMES expr .)
-    RPAREN          reduce using rule 7 (expr -> expr TIMES expr .)
+    DIVIDE          reduce using rule 7 (expr -> expr x expr .)
+    x               reduce using rule 7 (expr -> expr x expr .)
+    $end            reduce using rule 7 (expr -> expr x expr .)
+    RPAREN          reduce using rule 7 (expr -> expr x expr .)
     MINUS           shift and go to state 9
     +               shift and go to state 10
 
@@ -261,11 +261,11 @@ state 16
 
     (8) expr -> expr MINUS expr .
     (6) expr -> expr . DIVIDE expr
-    (7) expr -> expr . TIMES expr
+    (7) expr -> expr . x expr
     (8) expr -> expr . MINUS expr
     (9) expr -> expr . + expr
     DIVIDE          reduce using rule 8 (expr -> expr MINUS expr .)
-    TIMES           reduce using rule 8 (expr -> expr MINUS expr .)
+    x               reduce using rule 8 (expr -> expr MINUS expr .)
     MINUS           reduce using rule 8 (expr -> expr MINUS expr .)
     +               reduce using rule 8 (expr -> expr MINUS expr .)
     $end            reduce using rule 8 (expr -> expr MINUS expr .)
@@ -276,11 +276,11 @@ state 17
 
     (9) expr -> expr + expr .
     (6) expr -> expr . DIVIDE expr
-    (7) expr -> expr . TIMES expr
+    (7) expr -> expr . x expr
     (8) expr -> expr . MINUS expr
     (9) expr -> expr . + expr
     DIVIDE          reduce using rule 9 (expr -> expr + expr .)
-    TIMES           reduce using rule 9 (expr -> expr + expr .)
+    x               reduce using rule 9 (expr -> expr + expr .)
     MINUS           reduce using rule 9 (expr -> expr + expr .)
     +               reduce using rule 9 (expr -> expr + expr .)
     $end            reduce using rule 9 (expr -> expr + expr .)
@@ -291,12 +291,12 @@ state 18
 
     (2) statement -> NAME ASSIGN expr .
     (6) expr -> expr . DIVIDE expr
-    (7) expr -> expr . TIMES expr
+    (7) expr -> expr . x expr
     (8) expr -> expr . MINUS expr
     (9) expr -> expr . + expr
     $end            reduce using rule 2 (statement -> NAME ASSIGN expr .)
     DIVIDE          shift and go to state 7
-    TIMES           shift and go to state 8
+    x               shift and go to state 8
     MINUS           shift and go to state 9
     +               shift and go to state 10
 
@@ -305,7 +305,7 @@ state 19
 
     (4) expr -> LPAREN expr RPAREN .
     DIVIDE          reduce using rule 4 (expr -> LPAREN expr RPAREN .)
-    TIMES           reduce using rule 4 (expr -> LPAREN expr RPAREN .)
+    x               reduce using rule 4 (expr -> LPAREN expr RPAREN .)
     MINUS           reduce using rule 4 (expr -> LPAREN expr RPAREN .)
     +               reduce using rule 4 (expr -> LPAREN expr RPAREN .)
     $end            reduce using rule 4 (expr -> LPAREN expr RPAREN .)
