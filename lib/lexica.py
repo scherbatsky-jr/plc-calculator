@@ -15,7 +15,7 @@ class MyLexer(Lexer):
     # set `tokens` so it can be used in the parser.
     # This must be here and all Capitalized. 
     # Please, ignore IDE warning.
-    tokens = { ASSIGN, NAME, NUMBER, MINUS, DIVIDE, TIMES, LPAREN, RPAREN}
+    tokens = { ASSIGN, NAME, NUMBER, MINUS, TIMES,DIVIDE, LPAREN, RPAREN}
     
     # https://sly.readthedocs.io/en/latest/sly.html#literal-characters
     literals = { '+', '*' }

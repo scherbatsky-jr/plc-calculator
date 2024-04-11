@@ -63,12 +63,11 @@ class MyParser(Parser):
         operator_stack = []
         precedence = {'+': 2, '-': 2, '*': 1, '/': 1}
 
-        for token in reversed(list(tokens)):
+        for token in reversed(tokens):
             if token.isdigit():
                 prefix.append(token)
             elif token in precedence:
-                while (operator_stack and
-                    precedence[token] <= precedence[operator_stack[-1]]):
+                while (operator_stack and precedence[token] < precedence[operator_stack[-1]]):
                     prefix.append(operator_stack.pop())
                 operator_stack.append(token)
 
@@ -78,6 +77,7 @@ class MyParser(Parser):
         prefix_str = ' '.join(prefix)
 
         return prefix_str
+
     
     def post_fix_expr(self, expression):
         operator_stack = []

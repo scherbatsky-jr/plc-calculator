@@ -45,8 +45,8 @@ class MainWindow(QMainWindow):
         self.button_8.clicked.connect(lambda: self.push("8"))
         self.button_9.clicked.connect(lambda: self.push("9"))
         self.button_0.clicked.connect(lambda: self.push("0"))
-        self.button_plus.clicked.connect(lambda: self.push("+"))
-        self.button_star.clicked.connect(lambda: self.push("*"))
+        self.button_plus.clicked.connect(lambda: self.push_literal("+"))
+        self.button_star.clicked.connect(lambda: self.push_literal("*"))
         self.button_equal.clicked.connect(self.push_equal)
         self.button_clear.clicked.connect(self.clear)
 
@@ -56,7 +56,11 @@ class MainWindow(QMainWindow):
     
     def push(self, text:str):
         current_text:str = self.input_text.text()
-        self.input_text.setText(f"{current_text} {text}")
+        self.input_text.setText(f"{current_text}{text}")
+
+    def push_literal(self, text:str):
+        current_text:str = self.input_text.text()
+        self.input_text.setText(f"{current_text} {text} ")
 
     def clear(self):
         current_text:str = ''
@@ -71,6 +75,8 @@ class MainWindow(QMainWindow):
         
         input_text = self.input_text.text()
         tokens = lexer.tokenize(input_text)
+
+        print(tokens)
 
         result = parser.parse(tokens)
         prefix = parser.pre_fix_expr(input_text)
